@@ -10,24 +10,26 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
 import LoaderIcon from "@/assets/Loading";
+import { User } from "@/lib/types";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 })
 const Login = () => {
-  const { token, setToken } = useAuth();
+  const { token, setToken, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      navigate("/", { replace: true });
       toast.warning("User is Logged in")
+      navigate("/", { replace: true });
     }
   }, [])
-  const handleLogin = (token: string) => {
+  const handleLogin = (token: string, user: User) => {
     setToken(token);
+    setUser(user)
     navigate("/", { replace: true });
   };
 
@@ -49,7 +51,16 @@ const Login = () => {
         setIsLoading(false)
         toast.success("login success")
         form.reset()
-        handleLogin(response.data.token)
+        handleLogin(response.data.token, {
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email,
+          isAdmin: response.data.isAdmin,
+          status: response.data.status,
+          isBlocked: response.data.isBlocked,
+          createdAt: response.data.createdAt,
+          updatedAt: response.data.updatedAt
+        })
       }
     } catch (err: any) {
 

@@ -6,17 +6,20 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
 import LoaderIcon from "@/assets/Loading";
+import { User } from "@/lib/types";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
   confirmPassword: z.string().min(6, { message: "Password must be at least 6 characters" }),
   name: z.string().min(2, { message: "Name must be at least 2 characters" }),
+  isAdmin: z.boolean().default(false).optional(),
 }).superRefine(({ confirmPassword, password }, ctx) => {
   if (confirmPassword !== password) {
     ctx.addIssue({
@@ -27,7 +30,7 @@ const schema = z.object({
   }
 })
 const Register = () => {
-  const { token, setToken } = useAuth();
+  const { token, setToken, setUser } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,8 +39,9 @@ const Register = () => {
       toast.warning("User is Logged in")
     }
   }, [])
-  const handleLogin = (token: string) => {
+  const handleLogin = (token: string, user: User) => {
     setToken(token);
+    setUser(user)
     navigate("/", { replace: true });
   };
 
@@ -46,7 +50,8 @@ const Register = () => {
       email: "",
       password: "",
       confirmPassword: "",
-      name: ""
+      name: "",
+      isAdmin: false
     },
     resolver: zodResolver(schema),
   })
@@ -60,7 +65,16 @@ const Register = () => {
         setIsLoading(false)
         toast.success("Registration success")
         form.reset()
-        handleLogin(response.data.token)
+        handleLogin(response.data.token, {
+          id: response.data.id,
+          name: response.data.name,
+          email: response.data.email,
+          isAdmin: response.data.isAdmin,
+          status: response.data.status,
+          isBlocked: response.data.isBlocked,
+          createdAt: response.data.createdAt,
+          updatedAt: response.data.updatedAt
+        })
       }
     } catch (err: any) {
 
@@ -143,6 +157,25 @@ const Register = () => {
                     />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="isAdmin"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 shadow">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel>
+                      Is this user an admin?
+                    </FormLabel>
+                  </div>
                 </FormItem>
               )}
             />

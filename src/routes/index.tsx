@@ -1,11 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./ProtectedRoute";
 import Login from "../pages/Login";
-import Logout from "../pages/Logout";
-import Board from "@/components/v2/Board";
 import ErrorPage from "@/ErrorPage";
 import TopBar from "@/components/TopBar";
 import Register from "@/pages/Register";
+import Admin from "@/pages/Admin";
+import Rank from "@/pages/Rank";
 
 const Routes = () => {
 
@@ -41,12 +41,12 @@ const Routes = () => {
           element: <><TopBar /><div>banana</div></>
         },
         {
-          path: "/profile",
-          element: <div>User Profile</div>,
+          path: "/admin",
+          element: <><TopBar /><Admin /></>
         },
         {
-          path: "/logout",
-          element: <Logout />,
+          path: "/rank",
+          element: <><TopBar /><Rank /></>
         },
       ],
     },
