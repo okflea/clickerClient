@@ -1,3 +1,4 @@
+import CreateUserDialog from "@/components/dialog/CreateUserDialog";
 import DeleteUserDialog from "@/components/dialog/DeleteTaskDialog";
 import EditUserDialog from "@/components/dialog/EditUserDialog";
 import { Badge } from "@/components/ui/badge";
@@ -19,11 +20,15 @@ const Admin = () => {
     queryFn: getUsers
   })
   return <>
+
     {/* table */}
     <div
       className="overflow-x-auto p-10 mt-20 m-4 border-2 border-yellow-400 rounded-lg shadow-lg">
+      <CreateUserDialog />
       <Table>
-        <TableCaption>A list of all users</TableCaption>
+        <TableCaption className="gap-2">
+          <p> A list of all users </p>
+        </TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="">Name</TableHead>

@@ -35,7 +35,7 @@ function TopBar() {
           {/* <ReaderIcon className="w-5 h-5 text-white" /> */}
           🍌
         </p>
-        {user && (
+        {token && (
           <>
             <Button
               className={`${user?.isAdmin ? "" : "hidden"}`}
@@ -64,11 +64,9 @@ function TopBar() {
 
       <div>
         {token && (
-
           <div className="flex flex-row items-center gap-2">
             <div className="text-white">
               <Badge variant={"outline"} className="text-slate-50 p-2 rounded-full">
-
                 {user?.name}
               </Badge>
             </div>
@@ -81,24 +79,22 @@ function TopBar() {
               "Logout"
               }</Button>
           </div>
-        )
-        }
-        {
-          !token && (
+        )}
+        {!token && (
 
-            <div className="space-x-2">
-              <Button
-                variant={pathname === "/login" ? "ghost" : "secondary"}
-                disabled={pathname === "/login"}
-                onClick={() => navigate("/login")}
-              > Login</Button>
-              <Button
-                variant={pathname === "/register" ? "ghost" : "secondary"}
-                disabled={pathname === "/register"}
-                onClick={() => navigate("/register")}
-              >Signup</Button>
-            </div>
-          )
+          <div className="space-x-2">
+            <Button
+              variant={pathname === "/login" ? "ghost" : "secondary"}
+              disabled={pathname === "/login"}
+              onClick={() => navigate("/login")}
+            > Login</Button>
+            <Button
+              variant={pathname === "/register" ? "ghost" : "secondary"}
+              disabled={pathname === "/register"}
+              onClick={() => navigate("/register")}
+            >Signup</Button>
+          </div>
+        )
         }
       </div>
     </div>

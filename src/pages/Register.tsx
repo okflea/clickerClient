@@ -60,30 +60,29 @@ const Register = () => {
     setIsLoading(true)
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, values)
-      console.log(response.status)
+      const { id, name, email, isAdmin, status, isBlocked, createdAt, updatedAt } = response.data
       if (response.status === 201) {
-        setIsLoading(false)
         toast.success("Registration success")
         form.reset()
         handleLogin(response.data.token, {
-          id: response.data.id,
-          name: response.data.name,
-          email: response.data.email,
-          isAdmin: response.data.isAdmin,
-          status: response.data.status,
-          isBlocked: response.data.isBlocked,
-          createdAt: response.data.createdAt,
-          updatedAt: response.data.updatedAt
+          id,
+          name,
+          email,
+          isAdmin,
+          status,
+          isBlocked,
+          createdAt,
+          updatedAt
         })
       }
     } catch (err: any) {
-
-      setIsLoading(false)
       if (err.response?.status === 401) {
         toast.error(err.response?.data.error)
         return
       }
       toast.error("something went wrong")
+    } finally {
+      setIsLoading(false)
     }
   }
   return <>
