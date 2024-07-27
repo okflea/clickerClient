@@ -1,4 +1,3 @@
-import TopBar from "./components/TopBar";
 import AuthProvider from "./provider/AuthProvider";
 import { QueryProvider } from "./provider/QueryProvider";
 import Routes from "./routes";

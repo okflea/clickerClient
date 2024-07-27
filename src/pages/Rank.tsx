@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export function Rank() {
-  const [usersHighscores, setUsersHighscores] = useRecoilState<User[] | null>(usersScoreAtom);
+  const [usersHighscores, _] = useRecoilState<User[] | null>(usersScoreAtom);
   return (
     <div>
       <div
