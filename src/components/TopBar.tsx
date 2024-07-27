@@ -2,21 +2,25 @@ import { Button } from "./ui/button";
 import { useAuth } from "@/provider/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { Badge } from "./ui/badge";
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoaderIcon from "@/assets/Loading";
+import { ConnectionState } from "./ConnectionState";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "@/atoms";
+import { User } from "@/lib/types";
 
 function TopBar() {
-  const { token, setToken, setUser, user } = useAuth();
+  const [user, setUser] = useRecoilState<User | null>(UserAtom)
+  const { token, setToken } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
     setIsLoading(true)
     try {
       await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/logout`);
+      setUser(null)
       setToken(null);
-      setUser(null);
       navigate("/", { replace: true });
       toast.success("Logout success")
     } catch (err) {
@@ -26,6 +30,19 @@ function TopBar() {
       setIsLoading(false)
     }
   }
+  useEffect(() => {
+    if (user === null && token) {
+      axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/me`)
+        .then((res) => {
+          if (res.status === 200) {
+            setUser(res.data)
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }, [])
   const { pathname } = useLocation()
 
   return (
@@ -65,11 +82,7 @@ function TopBar() {
       <div>
         {token && (
           <div className="flex flex-row items-center gap-2">
-            <div className="text-white">
-              <Badge variant={"outline"} className="text-slate-50 p-2 rounded-full">
-                {user?.name}
-              </Badge>
-            </div>
+            <ConnectionState />
             <Button
               variant={"destructive"}
               onClick={handleLogout}

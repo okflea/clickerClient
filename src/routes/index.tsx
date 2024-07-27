@@ -6,6 +6,7 @@ import TopBar from "@/components/TopBar";
 import Register from "@/pages/Register";
 import Admin from "@/pages/Admin";
 import Rank from "@/pages/Rank";
+import Play from "@/pages/Play";
 
 const Routes = () => {
 
@@ -38,7 +39,7 @@ const Routes = () => {
       children: [
         {
           path: "",
-          element: <><TopBar /><div>banana</div></>
+          element: <><TopBar /><Play /></>
         },
         {
           path: "/admin",
