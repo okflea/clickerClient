@@ -63,7 +63,7 @@ const Register = () => {
     setIsLoading(true)
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, values)
-      const { id, name, email, isAdmin, status, isBlocked, createdAt, updatedAt } = response.data
+      const { id, name, score, email, isAdmin, status, isBlocked, createdAt, updatedAt } = response.data
       if (response.status === 201) {
         toast.success("Registration success")
         form.reset()
@@ -75,7 +75,8 @@ const Register = () => {
           status,
           isBlocked,
           createdAt,
-          updatedAt
+          updatedAt,
+          score
         })
       }
     } catch (err: any) {

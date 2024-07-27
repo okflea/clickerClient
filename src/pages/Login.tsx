@@ -62,7 +62,8 @@ const Login = () => {
           status: response.data.status,
           isBlocked: response.data.isBlocked,
           createdAt: response.data.createdAt,
-          updatedAt: response.data.updatedAt
+          updatedAt: response.data.updatedAt,
+          score: response.data.score
         })
       }
     } catch (err: any) {

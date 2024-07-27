@@ -42,6 +42,7 @@ function TopBar() {
           console.log(err)
         })
     }
+
   }, [])
   const { pathname } = useLocation()
 

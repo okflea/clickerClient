@@ -12,7 +12,7 @@ import axios from "axios";
 const Admin = () => {
   const getUsers = async () => {
     const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users`);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data.users;
   }
   const { data, isFetched } = useQuery<User[]>({
@@ -34,7 +34,7 @@ const Admin = () => {
             <TableHead className="">Name</TableHead>
             <TableHead>Email</TableHead>
             <TableHead>Status</TableHead>
-            <TableHead>isAdmin</TableHead>
+            <TableHead>Role</TableHead>
             <TableHead>isBlocked</TableHead>
             <TableHead className="text-center">Joined</TableHead>
             <TableHead className="text-center">Actions</TableHead>
@@ -55,11 +55,11 @@ const Admin = () => {
                 </Badge>
               </TableCell>
               <TableCell>
-                {user.isAdmin ?
-                  <CheckCircledIcon
-                    className="text-emerald-600" /> :
-                  <CrossCircledIcon
-                    className="text-orange-500" />}
+                <Badge
+                  variant={"outline"}
+                  className={`${user.isAdmin ? "text-sky-600" : "text-yellow-700"} p-2 rounded-full font-light`}>
+                  {user.isAdmin ? "Admin" : "Player"}
+                </Badge>
               </TableCell>
               <TableCell>
                 {user.isBlocked ?

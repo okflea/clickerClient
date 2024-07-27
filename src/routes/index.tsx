@@ -5,8 +5,8 @@ import ErrorPage from "@/ErrorPage";
 import TopBar from "@/components/TopBar";
 import Register from "@/pages/Register";
 import Admin from "@/pages/Admin";
-import Rank from "@/pages/Rank";
 import Play from "@/pages/Play";
+import { Rank } from "@/pages/Rank";
 
 const Routes = () => {
 
