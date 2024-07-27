@@ -1,6 +1,5 @@
 import { usersScoreAtom } from '@/atoms';
 import { User } from '@/lib/types';
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
@@ -9,7 +8,6 @@ export function Rank() {
   const [usersHighscores, setUsersHighscores] = useRecoilState<User[] | null>(usersScoreAtom);
   return (
     <div>
-
       <div
         className="overflow-x-auto p-10 mt-20 m-4 border-2 border-yellow-400 rounded-lg shadow-lg">
         <Table>

@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Play = () => {
-  const [user, setUser] = useRecoilState(UserAtom)
-  const [usersScore, setUsersScore] = useRecoilState(usersScoreAtom)
+  const [user, __] = useRecoilState(UserAtom)
+  const [_, setUsersScore] = useRecoilState(usersScoreAtom)
   const [score, setScore] = useState(user?.score);
   const handleClick = () => {
     if (user) {
