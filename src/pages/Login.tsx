@@ -11,13 +11,16 @@ import axios from "axios";
 import { toast } from "sonner";
 import LoaderIcon from "@/assets/Loading";
 import { User } from "@/lib/types";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "@/atoms";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
   password: z.string().min(6, { message: "Password must be at least 6 characters" }),
 })
 const Login = () => {
-  const { token, setToken, setUser } = useAuth();
+  const { token, setToken } = useAuth();
+  const [_, setUser] = useRecoilState<User | null>(UserAtom)
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -29,7 +32,7 @@ const Login = () => {
   }, [])
   const handleLogin = (token: string, user: User) => {
     setToken(token);
-    setUser(user)
+    setUser(user);
     navigate("/", { replace: true });
   };
 
@@ -119,9 +122,9 @@ const Login = () => {
             >{isLoading ? <LoaderIcon /> : "Login"}</Button>
           </form>
         </Form>
-        <p
+        <div
           className="text-sm py-2 font-thin">
-          Don't have an account? <p onClick={() => { navigate("/register") }} className="text-blue-500 font-normal hover:cursor-pointer" >Signup</p></p>
+          Don't have an account? <p onClick={() => { navigate("/register") }} className="text-blue-500 font-normal hover:cursor-pointer" >Signup</p></div>
       </div>
     </div>
   </>;

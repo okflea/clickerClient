@@ -13,6 +13,8 @@ import { toast } from "sonner";
 import LoaderIcon from "@/assets/Loading";
 import { User } from "@/lib/types";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useRecoilState } from "recoil";
+import { UserAtom } from "@/atoms";
 
 const schema = z.object({
   email: z.string().email("Invalid email"),
@@ -30,7 +32,8 @@ const schema = z.object({
   }
 })
 const Register = () => {
-  const { token, setToken, setUser } = useAuth();
+  const { token, setToken } = useAuth();
+  const [_, setUser] = useRecoilState<User | null>(UserAtom)
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -41,7 +44,7 @@ const Register = () => {
   }, [])
   const handleLogin = (token: string, user: User) => {
     setToken(token);
-    setUser(user)
+    setUser(user);
     navigate("/", { replace: true });
   };
 
@@ -185,7 +188,7 @@ const Register = () => {
             >{isLoading ? <LoaderIcon /> : "Sign up"}</Button>
           </form>
         </Form>
-        <p className="text-sm font-thin">Already have an account? <p onClick={() => { navigate("/login") }} className="text-blue-500 font-normal hover:cursor-pointer">Login</p></p>
+        <div className="text-sm font-thin">Already have an account? <p onClick={() => { navigate("/login") }} className="text-blue-500 font-normal hover:cursor-pointer">Login</p></div>
       </div>
     </div>
   </>;
