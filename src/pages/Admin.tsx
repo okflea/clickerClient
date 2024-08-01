@@ -71,7 +71,7 @@ const Admin = () => {
                 }
               </TableCell>
               <TableCell className="text-center font-light">{formatDateTime(user.createdAt)}</TableCell>
-              <TableCell className=" gap-2">
+              <TableCell className="text-center gap-2">
                 <EditUserDialog user={user} />
                 <DeleteUserDialog userId={user.id} />
               </TableCell>

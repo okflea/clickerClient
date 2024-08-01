@@ -9,6 +9,7 @@ import { ConnectionState } from "./ConnectionState";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "@/atoms";
 import { User } from "@/lib/types";
+import { ModeToggle } from "./ThemeToggle";
 
 function TopBar() {
   const [user, setUser] = useRecoilState<User | null>(UserAtom)
@@ -46,30 +47,30 @@ function TopBar() {
   const { pathname } = useLocation()
 
   return (
-    <div className="w-full h-[50px] bg-gradient-to-b from-blue-400 to-blue-600 shadow-2xl flex justify-between items-center px-4    ">
-      <div className="flex gap-2">
-        <p className="text-3xl">
+    <div className="w-full h-[50px] bg-gradient-to-b from-blue-400 to-blue-600 dark:from-blue-700 dark:to-blue-900 shadow-2xl flex justify-between items-center px-3 py-0 pr-0">
+      <div className="flex ">
+        <p className="text-3xl p-1 pr-3 cursor-default hover:animate-spin">
           {/* <ReaderIcon className="w-5 h-5 text-white" /> */}
           🍌
         </p>
         {token && (
           <>
             <Button
-              className={`${user?.isAdmin ? "" : "hidden"}`}
+              className={`h-[50px] ${user?.isAdmin ? "" : "hidden"}`}
               variant={`${pathname === "/admin" ? "secondary" : "ghost"}`}
               disabled={pathname === "/admin"}
               onClick={() => navigate("/admin")}
             > Admin</Button>
 
             <Button
-              className={``}
+              className={`h-[50px]`}
               variant={`${pathname === "/" ? "secondary" : "ghost"}`}
               disabled={pathname === "/"}
               onClick={() => navigate("/")}
             > Play</Button>
 
             <Button
-              className={``}
+              className={`h-[50px]`}
               variant={`${pathname === "/rank" ? "secondary" : "ghost"}`}
               disabled={pathname === "/rank"}
               onClick={() => navigate("/rank")}
@@ -81,9 +82,11 @@ function TopBar() {
 
       <div>
         {token && (
-          <div className="flex flex-row items-center gap-2">
+          <div className="flex flex-row items-center ">
+            <ModeToggle />
             <ConnectionState />
             <Button
+              className="h-[50px]"
               variant={"destructive"}
               onClick={handleLogout}
               disabled={isLoading}
@@ -95,14 +98,17 @@ function TopBar() {
         )}
         {!token && (
 
-          <div className="space-x-2">
+          <div className="flex flex-row items-center ">
+            <ModeToggle />
             <Button
-              variant={pathname === "/login" ? "ghost" : "secondary"}
+              className="h-[50px]"
+              variant={pathname === "/login" ? "secondary" : "ghost"}
               disabled={pathname === "/login"}
               onClick={() => navigate("/login")}
             > Login</Button>
             <Button
-              variant={pathname === "/register" ? "ghost" : "secondary"}
+              className="h-[50px]"
+              variant={pathname === "/register" ? "secondary" : "ghost"}
               disabled={pathname === "/register"}
               onClick={() => navigate("/register")}
             >Signup</Button>

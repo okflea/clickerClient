@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { UserAtom } from "@/atoms";
-import { AvatarIcon, GlobeIcon } from "@radix-ui/react-icons";
+import { AvatarIcon } from "@radix-ui/react-icons";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip";
 import { socket } from "@/socket";
 
@@ -31,9 +31,9 @@ export function ConnectionState() {
       <Tooltip>
         <TooltipTrigger asChild>
           <div
-            className="border border-slate-50 rounded-2xl p-2 flex flex-row items-center gap-2"
+            className="bg-transparent h-[50px] px-3 flex  flex-row items-center cursor-default gap-2"
           >
-            {socket.connected && <GlobeIcon className="w-5 h-5 text-emerald-400" />}
+            {socket.connected && <AvatarIcon className="w-5 h-5 text-emerald-400" />}
             {!socket.connected && <AvatarIcon className="w-5 h-5 text-rose-300" />}
             <p>
               {user?.name}</p>
@@ -43,7 +43,8 @@ export function ConnectionState() {
           </div>
         </TooltipTrigger>
         <TooltipContent>
-          socket connection
+          {socket.connected && <p>Online</p>}
+          {!socket.connected && <p>Offline</p>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

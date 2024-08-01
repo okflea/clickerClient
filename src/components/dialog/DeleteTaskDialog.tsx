@@ -45,7 +45,7 @@ function DeleteUserDialog({ userId }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant="ghost"
+          variant="destructive"
           className="p-1">
           <TrashIcon />
         </Button>
@@ -60,6 +60,7 @@ function DeleteUserDialog({ userId }: Props) {
         <DialogFooter>
           <Button
             type="button"
+            size={"icon"}
             disabled={isLoading}
             variant={"destructive"} onClick={() => deleteUser(userId)}
           >{isLoading ? <LoaderIcon /> : "Delete"}</Button>

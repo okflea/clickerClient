@@ -77,7 +77,7 @@ function EditUserDialog({ user }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant="ghost"
+          variant="secondary"
           className="p-1">
           <Pencil2Icon />
         </Button>

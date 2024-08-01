@@ -20,15 +20,15 @@ const Play = () => {
   }, []);
   return <>
     <div className="flex flex-col items-center h-screen justify-center">
-      <div className="border-2 border-yellow-400 rounded-2xl shadow-lg p-20 flex flex-col gap-y-8">
-        <h1 className="text-5xl font-semibold">
+      <div className="border-2 border-yellow-400  shadow-lg p-20 flex flex-col gap-y-8">
+        <h1 className="text-5xl font-semibold text-primary">
           Banana Clicker
         </h1>
         <Button
-          className="text-2xl h-14 bg-blue-400 hover:bg-blue-600 hover:animate-pulse"
-          variant={"secondary"}
+          className="text-2xl h-14  hover:animate-pulse"
+          // variant={"secondary"}
           onClick={handleClick}>🍌</Button>
-        <p className="text-3xl text-center">Score: {score}</p>
+        <p className="text-3xl text-center text-primary light:text-black">Score: {score}</p>
       </div>
     </div>
 

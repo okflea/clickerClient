@@ -7,6 +7,13 @@ import App from './App.tsx'
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
-    <Toaster />
+    <Toaster
+      position='bottom-center'
+      toastOptions={{
+        classNames: {
+          toast: 'rounded-none'
+        }
+      }}
+    />
   </React.StrictMode>,
 )

@@ -78,8 +78,8 @@ function CreateUserDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button
-          variant="secondary"
-          className="justify-evenly p-1 bg-yellow-400 mb-4 float-end w-40">
+          // variant="secondary"
+          className="justify-evenly p-1 mb-4 float-end w-40">
           <PlusCircledIcon />
           <p> Create User </p>
         </Button>
