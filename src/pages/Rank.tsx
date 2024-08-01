@@ -1,11 +1,21 @@
-import { usersScoreAtom } from '@/atoms';
 import { User } from '@/lib/types';
-import { useRecoilState } from 'recoil';
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCaption, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { useEffect, useState } from 'react';
+import { socket } from '@/socket';
+import { useQueryClient } from '@tanstack/react-query';
 
 export function Rank() {
-  const [usersHighscores, _] = useRecoilState<User[] | null>(usersScoreAtom);
+  const qc = useQueryClient()
+  const data = qc.getQueryData<User[]>(["users"])
+  const [usersHighscores, setUsersHighscores] = useState(data)
+  useEffect(() => {
+    socket.on("highScores", (data) => {
+      setUsersHighscores(data)
+    })
+    return () => {
+    };
+  }, [])
   return (
     <div>
       <div
@@ -37,14 +47,14 @@ export function Rank() {
               </TableRow>
             ))}
           </TableBody>
-          <TableFooter>
-            <TableRow>
-              <TableCell colSpan={7}>Total 🍌 </TableCell>
-              <TableCell className="text-right">{
-                usersHighscores?.reduce((acc, user) => acc + (user.score || 0), 0)
-              }</TableCell>
-            </TableRow>
-          </TableFooter>
+          {/* <TableFooter> */}
+          {/*   <TableRow> */}
+          {/*     <TableCell colSpan={7}>Total 🍌 </TableCell> */}
+          {/*     <TableCell className="text-right">{ */}
+          {/*       usersHighscores?.reduce((acc, user) => acc + (user.score || 0), 0) */}
+          {/*     }</TableCell> */}
+          {/*   </TableRow> */}
+          {/* </TableFooter> */}
         </Table>
 
       </div>

@@ -7,5 +7,5 @@ export interface User {
   status: string
   createdAt: string
   updatedAt?: string
-  score?: number
+  score: number
 }

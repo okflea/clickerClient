@@ -10,27 +10,22 @@ export function ConnectionState() {
   const [user, _] = useRecoilState(UserAtom);
 
   useEffect(() => {
-    function onConnect() {
-      console.log('Connected!'); // Debug log
+    if (user && socket.connected) {
+      socket.emit('login', user.id);
     }
 
-    function onDisconnect() {
-      console.log('Disconnected!'); // Debug log
-    }
-
-    socket.on('connect', onConnect);
-    socket.on('disconnect', onDisconnect);
-
-    // Attempt to connect if not connected
-    if (!socket.connected) {
-      socket.connect();
-    }
+    // const handleStatusUpdate = ({ userId, status }) => {
+    //   if (userId === user?.id) {
+    //     setUser(prevUser => ({ ...prevUser, status }));
+    //   }
+    // };
 
     return () => {
-      socket.off('connect', onConnect);
-      socket.off('disconnect', onDisconnect);
+      if (user) {
+        socket.emit('logout', user.id);
+      }
     };
-  }, []);
+  }, [user]);
   return (
     <TooltipProvider>
       <Tooltip>

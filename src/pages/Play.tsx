@@ -1,35 +1,21 @@
-import { UserAtom, usersScoreAtom } from "@/atoms";
+import { UserAtom } from "@/atoms";
 import { Button } from "@/components/ui/button";
 import { socket } from "@/socket";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 
 const Play = () => {
-  const [user, __] = useRecoilState(UserAtom)
-  const [_, setUsersScore] = useRecoilState(usersScoreAtom)
-  const [score, setScore] = useState(user?.score);
+  const [user, setUser] = useRecoilState(UserAtom)
+  const [score, setScore] = useState<number>(user?.score || 0);
   const handleClick = () => {
+    setScore(prev => prev + 1)
+    setUser(prev => prev && { ...prev, score: prev.score + 1 })
     if (user) {
-      socket.emit('bananaClick', { userId: user.id });
+      socket.emit('updateScore', { userId: user.id });
     }
   };
   useEffect(() => {
-    // listen for highscores
-    socket.on('highScoresUpdate', (
-      scores:
-        any
-    ) => {
-      // console.log("High scores updated:", scores);
-      setUsersScore(scores)
-    })
-    // Listen for score updates from the server
-    socket.on('scoreUpdate', (updatedScore: number) => {
-      console.log("Score updated:", updatedScore);
-      setScore(updatedScore);
-    });
-
     return () => {
-      socket.off('scoreUpdate');
     };
   }, []);
   return <>

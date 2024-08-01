@@ -21,18 +21,6 @@ const AuthProvider = ({ children }: any) => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       localStorage.setItem('token', token);
-      // if (user === null) {
-      //   axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/me`)
-      //     .then((res) => {
-      //       console.log("authme", res.data);
-      //       if (res.status === 200) {
-      //         setUser(res.data)
-      //       }
-      //     })
-      //     .catch((err) => {
-      //       console.log(err)
-      //     })
-      // }
     } else {
       delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem('token')

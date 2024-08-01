@@ -18,7 +18,6 @@ function TopBar() {
   const handleLogout = async () => {
     setIsLoading(true)
     try {
-      await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/logout`);
       setUser(null)
       setToken(null);
       navigate("/", { replace: true });
