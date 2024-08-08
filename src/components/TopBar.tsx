@@ -47,7 +47,7 @@ function TopBar() {
   const { pathname } = useLocation()
 
   return (
-    <div className="w-full h-[50px] bg-gradient-to-b from-blue-400 to-blue-600 dark:from-blue-700 dark:to-blue-900 shadow-2xl flex justify-between items-center px-3 py-0 pr-0">
+    <div className="w-full h-[50px] bg-gradient-to-b from-primary to-primary/90  shadow-2xl flex justify-between items-center px-3 py-0 pr-0">
       <div className="flex ">
         <p className="text-3xl p-1 pr-3 cursor-default hover:animate-spin">
           {/* <ReaderIcon className="w-5 h-5 text-white" /> */}

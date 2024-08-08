@@ -13,4 +13,12 @@ export function dialogCloseFn() {
 export function formatDateTime(date: string | undefined) {
   if (!date) return ""
   return new Date(date).toLocaleString()
-} 
+}
+
+export const calculateUpgradeCost = (baseCost: number, level: number, growthFactor: number): number => {
+  return Math.floor(baseCost * Math.pow(growthFactor, level));
+};
+
+export const calculateUpgradeBenefit = (baseBenefit: number, level: number): number => {
+  return baseBenefit * level;
+};

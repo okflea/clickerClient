@@ -8,4 +8,5 @@ export interface User {
   createdAt: string
   updatedAt?: string
   score: number
+  bananas: number
 }

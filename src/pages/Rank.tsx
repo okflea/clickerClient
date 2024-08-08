@@ -19,7 +19,7 @@ export function Rank() {
   return (
     <div>
       <div
-        className="overflow-x-auto p-10 mt-20 m-4 border-2 border-yellow-400 rounded-lg shadow-lg">
+        className="overflow-x-auto p-10 mt-20 m-4 border-2 border-secondary rounded-lg shadow-lg">
         <Table>
           <TableCaption className="gap-2">
             <p> Top 10 High Scores </p>

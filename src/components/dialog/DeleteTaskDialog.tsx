@@ -57,15 +57,20 @@ function DeleteUserDialog({ userId }: Props) {
             Are you sure you want to delete this user? This action cannot be undone.
           </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
+        <DialogFooter
+          className="w-full"
+        >
           <Button
             type="button"
-            size={"icon"}
             disabled={isLoading}
+            className="w-1/2"
             variant={"destructive"} onClick={() => deleteUser(userId)}
           >{isLoading ? <LoaderIcon /> : "Delete"}</Button>
           <DialogClose asChild>
-            <Button type="button" variant={"secondary"}>Cancel</Button>
+            <Button
+              className="w-1/2"
+              type="button"
+              variant={"secondary"}>Cancel</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

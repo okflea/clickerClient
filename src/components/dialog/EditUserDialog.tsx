@@ -58,7 +58,7 @@ function EditUserDialog({ user }: Props) {
       if (res.status === 200) {
         qc.invalidateQueries({ queryKey: ["users"] })
         form.reset()
-        toast.success("Task updated")
+        toast.success("User updated")
         dialogCloseFn()
 
       }
@@ -158,7 +158,9 @@ function EditUserDialog({ user }: Props) {
             <Button
               disabled={isLoading}
               type="submit"
-              className="w-full bg-yellow-500 hover:bg-yellow-600"
+              variant={"secondary"}
+              // className="w-full bg-yellow-500 hover:bg-yellow-600"
+              className="w-full "
             >{isLoading ? <LoaderIcon /> : "Save"}</Button>
           </form>
         </Form>

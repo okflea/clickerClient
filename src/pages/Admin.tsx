@@ -23,7 +23,7 @@ const Admin = () => {
 
     {/* table */}
     <div
-      className="overflow-x-auto p-10 mt-20 m-4 border-2 border-yellow-400 rounded-lg shadow-lg">
+      className="overflow-x-auto p-10 mt-20 m-4 border-2 border-secondary rounded-lg shadow-lg">
       <CreateUserDialog />
       <Table>
         <TableCaption className="gap-2">
@@ -38,6 +38,7 @@ const Admin = () => {
             <TableHead>isBlocked</TableHead>
             <TableHead className="text-center">Joined</TableHead>
             <TableHead className="text-center">Actions</TableHead>
+            <TableHead className="text-right">Bananas</TableHead>
             <TableHead className="text-right">Score</TableHead>
           </TableRow>
         </TableHeader>
@@ -75,15 +76,16 @@ const Admin = () => {
                 <EditUserDialog user={user} />
                 <DeleteUserDialog userId={user.id} />
               </TableCell>
+              <TableCell className="text-right">{user.bananas}</TableCell>
               <TableCell className="text-right">{user.score}</TableCell>
             </TableRow>
           ))}
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell colSpan={7}>Total 🍌 </TableCell>
+            <TableCell colSpan={8}>Total 🍌 </TableCell>
             <TableCell className="text-right">{
-              data?.reduce((acc, user) => acc + (user.score || 0), 0)
+              data?.reduce((acc, user) => acc + (user.bananas || 0), 0)
             }</TableCell>
           </TableRow>
         </TableFooter>
