@@ -54,7 +54,7 @@ const Play = () => {
   const handleUpgrade = async ({
     id: upgradeId,
     type: upgradeType,
-    level: currentLevel,
+    // level: currentLevel,
     cost,
     benefit
   }: {
