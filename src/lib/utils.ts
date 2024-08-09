@@ -20,5 +20,5 @@ export const calculateUpgradeCost = (baseCost: number, level: number, growthFact
 };
 
 export const calculateUpgradeBenefit = (baseBenefit: number, level: number): number => {
-  return baseBenefit * level;
+  return baseBenefit + level;
 };

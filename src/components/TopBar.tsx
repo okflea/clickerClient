@@ -81,6 +81,11 @@ function TopBar() {
       </div>
 
       <div>
+        <h1 className="font-nabla text-2xl">
+          Banana Bonanza
+        </h1>
+      </div>
+      <div>
         {token && (
           <div className="flex flex-row items-center ">
             <ModeToggle />

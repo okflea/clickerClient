@@ -63,7 +63,7 @@ const Register = () => {
     setIsLoading(true)
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, values)
-      const { id, name, score, email, isAdmin, status, isBlocked, createdAt, updatedAt } = response.data
+      const { id, name, bananas, score, email, isAdmin, status, isBlocked, createdAt, updatedAt } = response.data
       if (response.status === 201) {
         toast.success("Registration success")
         form.reset()
@@ -76,7 +76,8 @@ const Register = () => {
           isBlocked,
           createdAt,
           updatedAt,
-          score
+          score,
+          bananas,
         })
       }
     } catch (err: any) {
@@ -91,8 +92,8 @@ const Register = () => {
   }
   return <>
     <div className="w-full h-[500px] flex items-center justify-center">
-      <div className="w-[400px] flex flex-col items-center justify-center border-2 border-blue-500 rounded-lg shadow-lg p-4 space-y-4">
-        <h1 className="text-3xl font-bold text-blue-500">Register</h1>
+      <div className="w-[400px] flex flex-col items-center justify-center border-2 border-secondary rounded-lg shadow-lg p-4 space-y-4">
+        <h1 className="text-3xl font-bold text-primary">Register</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
             <FormField
@@ -183,13 +184,13 @@ const Register = () => {
               )}
             />
             <Button
-              className="w-full bg-blue-500 hover:bg-blue-600"
+              className="w-full bg-primary hover:bg-primary/80"
               type="submit"
               disabled={isLoading}
             >{isLoading ? <LoaderIcon /> : "Sign up"}</Button>
           </form>
         </Form>
-        <div className="text-sm font-thin">Already have an account? <p onClick={() => { navigate("/login") }} className="text-blue-500 font-normal hover:cursor-pointer">Login</p></div>
+        <div className="text-sm font-light">Already have an account? <p onClick={() => { navigate("/login") }} className="text-secondary font-normal hover:cursor-pointer">Login</p></div>
       </div>
     </div>
   </>;

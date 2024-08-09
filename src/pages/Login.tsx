@@ -63,7 +63,8 @@ const Login = () => {
           isBlocked: response.data.isBlocked,
           createdAt: response.data.createdAt,
           updatedAt: response.data.updatedAt,
-          score: response.data.score
+          score: response.data.score,
+          bananas: response.data.bananas
         })
       }
     } catch (err: any) {
@@ -78,8 +79,8 @@ const Login = () => {
   }
   return <>
     <div className="w-full h-[500px] flex items-center justify-center">
-      <div className="w-[400px] flex flex-col items-center justify-center border-2 border-blue-500 rounded-lg shadow-lg p-4 space-y-3">
-        <h1 className="text-3xl font-bold text-blue-500">Login</h1>
+      <div className="w-[400px] flex flex-col items-center justify-center border-2 border-secondary rounded-lg shadow-lg p-4 space-y-3">
+        <h1 className="text-3xl font-bold text-primary">Login</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 w-full">
             <FormField
@@ -117,15 +118,15 @@ const Login = () => {
               )}
             />
             <Button
-              className="w-full bg-blue-500 hover:bg-blue-600"
+              className="w-full bg-primary hover:bg-primary/80"
               type="submit"
               disabled={isLoading}
             >{isLoading ? <LoaderIcon /> : "Login"}</Button>
           </form>
         </Form>
         <div
-          className="text-sm py-2 font-thin">
-          Don't have an account? <p onClick={() => { navigate("/register") }} className="text-blue-500 font-normal hover:cursor-pointer" >Signup</p></div>
+          className="text-sm py-2 font-light">
+          Don't have an account? <p onClick={() => { navigate("/register") }} className="text-secondary font-normal hover:cursor-pointer" >Signup</p></div>
       </div>
     </div>
   </>;
